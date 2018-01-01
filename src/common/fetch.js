@@ -44,13 +44,6 @@ const func = (url, parameters, option) => {
         return {networkError: true}
       }
     }).then(res => {
-      if (url === '/api/unique_validate') {
-        res = {
-          re: '200'
-        }
-        resolve(res)
-        return res
-      }
       resolve(res)
       return res
     })

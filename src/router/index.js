@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import PageDetail from '@/components/PageDetail'
+import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
@@ -13,8 +13,8 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/page-detail',
-      name: 'PageDetail',
+      path: '/page',
+      name: 'page',
       component: PageDetail
     }
   ]

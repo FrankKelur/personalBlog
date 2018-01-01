@@ -3,10 +3,10 @@
     template(slot="title", slot-scope="props")
       slot(name="title", :item="item")
     b-menu(:item="child", v-for="(child, idx) in item.children", :key="idx", :index="child.id")
+      template(slot="title", slot-scope="props") {{props.item.label}}
+      span(slot-scope="props") {{props.item.label}}
   el-menu-item(v-else, :index="''+index", @click="showPage")
-    template(slot="title", slot-scope="props")
-        slot(name="title", :item="item")
-    slot
+    slot(:item="item")
 </template>
 
 <script>
