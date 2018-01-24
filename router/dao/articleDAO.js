@@ -1,15 +1,16 @@
 module.exports = {
   add (conn, entity) {
-    var sql = 'insert into article (title, content) values (?, ?)'
-    var params = [entity.title, JSON.stringify(entity.content)]
+    var sql = 'insert into article (title, content, page_id) values (?, ?, ?)'
+    var params = [entity.title, JSON.stringify(entity.content), entity.page_id]
     return new Promise((resolve, reject) => {
       conn.query(sql, params, (err, res) => {
         if (err) {
           console.log('[Insert error] - ', err.message)
+          resolve('')
           return
         }
-        console.log('[Insert Id] - ', res)
-        resolve(res)
+        // console.log('[Insert Id] - ', res)
+        resolve(res.insertId)
       })
     })
   },

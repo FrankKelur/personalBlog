@@ -42,7 +42,7 @@
           negative: '1',
           positive: '0'
         },
-        activeName: 1,
+        activeName: 0,
         commentDialogShow: false,
         comment: '',
         commentList: [],
@@ -50,10 +50,14 @@
       }
     },
     methods: {
+      getParams () {
+        console.log('this.$route.params.id', this.$route.params.id)
+      },
       getArticleList () {
-        console.log('this.$router.params.id', this.$route.params.id)
+        console.log('this.$router.params.id', this.$route.fullPath)
+        var path = this.$route.fullPath
         var params = {
-          id: this.$route.params.id
+          id: /=(\d+)$/.exec(path)[1]
         }
         return service.getArticleList(params).then(({re, data}) => {
           this.articleList = data
@@ -86,6 +90,11 @@
         // z todo 分享
       }
     },
+    watch: {
+      '$route.fullPath' (newVal) {
+        this.getArticleList()
+      }
+    },
     components: {
       BFormItem
     },
@@ -114,14 +123,14 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    >.content {
+    > .content {
       padding: 0 16px;
       flex-grow: 1;
       overflow-y: auto;
       overflow-x: hidden;
     }
-    >.footer {
-      padding: 0 16px;
+    > .footer {
+      padding: 10px 16px;
       line-height: 36px;
       i {
         font-size: 20px;

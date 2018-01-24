@@ -6,10 +6,11 @@ module.exports = {
       conn.query(sql, params, (err, res) => {
         if (err) {
           console.log('[Insert error] - ', err.message)
+          resolve('')
           return
         }
-        console.log('[Insert Id] - ', res)
-        resolve(res)
+        // console.log('[Insert Id] - ', res.insertId)
+        resolve(res.insertId)
       })
     })
   },

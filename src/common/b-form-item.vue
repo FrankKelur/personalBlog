@@ -2,7 +2,7 @@
   h2(v-if="elem.type==='h2'") {{elem.text}}
   p(v-else-if="elem.type==='p'") {{elem.text}}
   p(v-else-if="elem.type==='img'")
-    img(:src="elem.url")
+    img(:src="elem.url||elem.src")
 </template>
 
 <script>

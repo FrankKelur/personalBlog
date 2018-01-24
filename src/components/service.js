@@ -451,7 +451,13 @@ export default {
     //     ]
     //   })
     // })
-    return fetch(url, params)
+    return fetch(url, params).then(res => {
+      res.data.forEach(article => {
+        article.content = JSON.parse(article.content)
+        console.log('article parse')
+      })
+      return res
+    })
   },
   getArticleComments (params, url = '/api/get_article_comments') {
     // return new Promise((resolve, reject) => {

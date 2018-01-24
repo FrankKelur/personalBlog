@@ -14,8 +14,8 @@ module.exports = {
     var res = await commentDAO.list(conn, articleId)
     return res
   },
-  async get_page (conn, pageId) {
-    var res = await articleDAO.list(conn, pageId)
+  async get_page (conn, params) {
+    var res = await articleDAO.list(conn, params.id)
     return res
   },
   async get_recommend_list (conn) {
@@ -25,20 +25,16 @@ module.exports = {
   },
   async get_nav_list (conn) {
     // 获取页面tree
-    var res = await pageDAO.list(conn, null)
+    var list = await pageDAO.list(conn, null)
     // 循环调用，获取所有页面
-    await getAllChildren(res)
-    return res
-
-    function getAllChildren (list) {
-      return new Promise((resolve, reject) => {
-        list.forEach(async (item, idx) => {
-          item.children = await pageDAO.list(conn, item.id)
-          if (idx === list.length - 1) {
-            resolve(list)
-          }
-        })
-      })
+    for (var idx in list) {
+      var item = list[idx]
+      item.children = await pageDAO.list(conn, item.id)
+      for (var j in item.children) {
+        var subDir = item.children[j]
+        subDir.children = await pageDAO.list(conn, subDir.id)
+      }
     }
+    return list
   }
 }

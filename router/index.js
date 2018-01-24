@@ -12,9 +12,9 @@ var connection = mysql.createConnection({
 connection.connect()
 
 router.post('/api/*', async (ctx, next) => {
-  console.log('请求 ctx', '==============\n\n\n==============', ctx.query, ctx.url, ctx.header, ctx.methods, ctx.method, ctx.path, ctx.orgin, '==============\n\n\n==============')
+  console.log('请求 ctx', '==============\n\n\n==============', ctx.request.body, ctx.query, ctx.url, ctx.header, ctx.methods, ctx.method, ctx.path, ctx.origin, '==============\n\n\n==============')
   var method = ctx.url.replace('/api/', '')
-  var res = await service[method](connection)
+  var res = await service[method](connection, ctx.request.body)
   console.log('-------------------\n\n\n-------------------', res)
   ctx.body = {re: '200', data: res}
 })

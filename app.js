@@ -3,6 +3,7 @@ var https = require('https')
 var Koa = require('koa')
 var path = require('path')
 var Pug = require('koa-pug')
+const bodyParser = require('koa-body')
 var router = require('./router/index')
 // var webpackDevMiddleware = require('webpack-dev-middleware')
 var {devMiddleware, hotMiddleware} = require('koa-webpack-middleware')
@@ -22,6 +23,7 @@ var serve = require('koa-static')
 
 console.log('NODE_ENV', process.env.NODE_ENV)
 app.use(json())
+app.use(bodyParser())
 app.use(devMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
 }))

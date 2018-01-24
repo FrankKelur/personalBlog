@@ -14,10 +14,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "element-ui": "^2.0.8",
+    "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "^1.0.0",
     "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "koa-body-parser": "^1.1.2",
     "koa-json": "^2.0.2",
     "koa-pug": "^3.0.0-2",
     "koa-router": "^7.3.0",
@@ -25,6 +29,7 @@
     "koa-webpack-middleware": "^1.0.7",
     "mysql": "^2.15.0",
     "path": "^0.12.7",
+    "superagent": "^3.8.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

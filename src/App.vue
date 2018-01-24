@@ -2,7 +2,8 @@
   #app
     .top
       .top-inner
-        img(src="/images/logo.jpg")
+        router-link(to="/")
+          img(src="/images/logo.jpg")
         .el-input-container
           el-input(placeholder='输入您感兴趣的', v-model="keyWord")
             i.el-icon-search(slot="append", @click="searchByKeyWord")
@@ -19,7 +20,7 @@
       .left
         router-view
       .right
-        el-menu(:defaultActive="defaultActive", @open='handleOpen', @close='handleClose' background-color="#545c64" text-color="#fff" active-text-color="#ffd04b")
+        el-menu(:defaultActive="defaultActive", @open='handleOpen', @close='handleClose' background-color="#545c64" text-color="#fff" active-text-color="#ffd04b", :unique-opened="true")
           b-menu(:item='menu' v-for="(menu, idx) in navList", :key="idx", :index="menu.id")
             template(slot="title", slot-scope="props")
               i.nav-icon(:class="['icon', ' iconfont', props.item.icon]")
@@ -143,6 +144,7 @@
       }
     }
     .content {
+      height: 100%;
       margin-top: 10px;
       display: flex;
       flex-grow: 1;
@@ -150,6 +152,7 @@
       margin-left: auto;
       margin-right: auto;
       .left {
+        height: 100%;
         background: white;
         flex-grow: 1;
         overflow-y: hidden;
@@ -202,5 +205,11 @@
   }
   i.nav-icon.iconfont{
     margin-right: 10px;
+  }
+  .el-submenu .el-submenu .el-submenu__title {
+    background-color: lighten(#545c64, 10%) !important;
+  }
+  .el-submenu .el-submenu .el-menu-item {
+    background-color: lighten(lighten(#545c64, 10%), 10%) !important;
   }
 </style>
